@@ -16,17 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class IOController {
     private final IOService ioService;
 
-
-    /* Will not work if any of values are null */
     @GetMapping(value = "category/list")
     public ResponseEntity<?> getCategoryList() {
         return ResponseEntity.ok(ioService.getCategories());
     }
 
-    /* Could not implement /category?product_id={product_id}
-     * here is just category/{product_id}*/
-    @GetMapping(value = "category/details/{product_id}")
-    public ResponseEntity<?> getCategoryById(@PathVariable Integer product_id) {
+    @GetMapping(value = "category/details")
+    public ResponseEntity<?> getCategoryById(@RequestParam(name = "product_id") Integer product_id) {
         return ResponseEntity.ok(ioService.getCategoryById(product_id));
     }
 
@@ -35,10 +31,8 @@ public class IOController {
         return ResponseEntity.ok(ioService.getProductList());
     }
 
-    /* Could not implement /product/details?product_id={product_id}
-     * here is just /product/details/{product_id}*/
-    @GetMapping(value = "product/details/{product_id}")
-    public ResponseEntity<?> getProductById(@PathVariable Integer product_id) {
+    @GetMapping(value = "product/details")
+    public ResponseEntity<?> getProductById(@RequestParam(name = "product_id") Integer product_id) {
         return ResponseEntity.ok(ioService.getProductById(product_id));
     }
 
@@ -47,8 +41,8 @@ public class IOController {
         return ResponseEntity.ok(ioService.makeOrder(dto));
     }
 
-    @GetMapping(value = "/order/details/{order_id}")
-    public ResponseEntity<?> getOrderDetailsById(@PathVariable Integer order_id) {
+    @GetMapping(value = "/order/details")
+    public ResponseEntity<?> getOrderDetailsById(@RequestParam(name = "order_id") Integer order_id) {
         return ResponseEntity.ok(ioService.getOrderDetailsById(order_id));
     }
 
@@ -57,8 +51,8 @@ public class IOController {
         return ResponseEntity.ok(ioService.makePayment(dto));
     }
 
-    @GetMapping(value = "/payment/details/{payment_details_id}")
-    public ResponseEntity<?> getPaymentDetailsById(@PathVariable Integer payment_details_id) {
+    @GetMapping(value = "/payment/details")
+    public ResponseEntity<?> getPaymentDetailsById(@RequestParam(name = "payment_details_id") Integer payment_details_id) {
         return ResponseEntity.ok(ioService.getPaymentDetailsById(payment_details_id));
     }
 
@@ -67,8 +61,8 @@ public class IOController {
         return ResponseEntity.ok(ioService.addCustomer(customer));
     }
 
-    @GetMapping(value = "/customer/details/{customer_id}")
-    public ResponseEntity<?> getCustomerDetailsById(@PathVariable Integer customer_id) {
+    @GetMapping(value = "/customer/details")
+    public ResponseEntity<?> getCustomerDetailsById(@RequestParam(name = "customer_id") Integer customer_id) {
         return ResponseEntity.ok(ioService.getCustomerDetailsById(customer_id));
     }
 
